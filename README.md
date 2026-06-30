@@ -21,8 +21,9 @@ pip install -r requirements.txt
 코드를 GUI 환경(VNC 등을 이용한)에서 실행하여 촬영이 잘 찍히는지 확인하면서 고정된 위치에서 S를 눌러 저장합니다.
 10개 이상의 위치 샘플이 모였다면 Q를 눌러 캘리브레이션 결과를 산출합니다.
 
-![run_cilent.py 실행화면](./images/marker_interface.png)
-![Jetcobot 캘리브레이션 조작과정](./images/1000026411.jpg)
+<img src="./images/marker_interface.png" width="700" alt="run_cilent.py 실행화면">
+
+<img src="./images/1000026411.jpg" width="700" alt="Jetcobot 캘리브레이션 조작과정">
 
 ### Ubuntu Terminal
 

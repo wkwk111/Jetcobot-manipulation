@@ -51,16 +51,37 @@ python3 run_cilent.py
 
 ## 3. 자동 카메라 캘리브레이션
 
-수동 카메라 캘리브레이션은 
+수동 카메라 캘리브레이션은 위치마다 촬영 과정에서 손 떨림 등의 문제가 발생하여 캘리브레이션 결과가 조잡할 수 있음
+따라서 수동 카메라 캘리브레이션 과정을 통해 여러 위치를 기반으로 자동으로 비슷한 위치에 이동해서 
+더 많은 위치의 사진을 안정적으로 찍는 자동 카메라 캘리브레이션을 수행
+
+auto_marker.py 내부의
+
+MAX_AUTO_SAMPLES 파라미터를 조정하여 촬영한 샘플 갯수 조정
+SPEED 파라미터를 조정하여 Jetcobot의 자동 촬영 스피드 조정
+
+촬영 샘플의 갯수는 30장 이상, SPEED 파라미터는 백래쉬등의 현상으로 인해 느린 스피드를 추천
 
 ### Ubuntu Terminal
 
-```mkdir client
-cd client
-python3 -m venv ~/venv/client
-source ~/venv/client/bin/activate
-pip install -r requirements.txt
+```cd client
+python3 auto_marker.py
 ```
+
+<p align="center">
+  <img 
+    src="./images/auto_marker_result.png" 
+    alt="auto_marker.py 실행과정"
+    height="400"
+    width="700"
+  /><br>
+  <em>그림 3. auto_marker.py 실행과정</em>
+</p>
+
+결과물로 `client/auto_camera_intrinsic_charuco_20260630_102938.npz`,
+`client/auto_handeye_charuco_samples_20260630_102938.npz`,
+`client/auto_handeye_result_20260630_102938.json`, 
+`client/auto_handeye_result_20260630_102938.npz`,이 생성됩니다.
 
 ## 4. 서버 설정 
 

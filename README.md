@@ -1,4 +1,4 @@
-# Jetcobot-manipulation_server
+# Jetcobot-manipulation_arm
 
 ## 1. 노트북 준비
 
@@ -47,7 +47,7 @@ pip install -r requirements.txt
 ```cd client
 python3 run_cilent.py
 ```
-결과물로 `client/camera_intrinsic_charuco.npz`, `client/camera_intrinsic_charuco.npz`이 생성됩니다.
+결과물로 `client/camera_intrinsic_charuco.npz`등이 생성됩니다.
 
 ## 3. 자동 카메라 캘리브레이션
 
@@ -83,18 +83,43 @@ python3 auto_marker.py
 `client/auto_handeye_result_20260630_102938.json`, 
 `client/auto_handeye_result_20260630_102938.npz`,이 생성됩니다.
 
-## 4. 서버 설정 
+## 4. 서버 및 Jetcobot 파라미터 설정 
 
-`robot_client/`, `config/`이 포함된 이 폴더 전체를 노트북에 둡니다.
+2,3번 과정을 수행한 결과물인
+`client/camera_intrinsic_charuco.npz`과
+`client/auto_handeye_result_20260630_102938.json`을 
 
-### Ubuntu Terminal
+`dl_server/calibration`로 옮긴 후
+`dl_server/config/server_config.ini` 파일의
 
-```mkdir client
-cd client
-python3 -m venv ~/venv/client
-source ~/venv/client/bin/activate
-pip install -r requirements.txt
-```
+intrinsic_file
+handeye_result_json
+
+파라미터를 결과물의 이름으로 수정합니다.
+
+또한 적절히 다른 파라미터들에 관해서도 환경에 맞게 수정할 부분을 수정합니다.
+
+`client/config/client_config.ini` 에서는 대표적으로
+
+grasp_server_url
+home_flange_coords 를 수정합니다.
+
+grasp_server_url은 노트북 터미널에서 ifconfig를 수행한 이후 아래 이미지와 같이 wlo1의 inet 주소를 확인하여
+grasp_server_url = http://<inet 주소>:8000/v1/grasp-plan로 설정합니다.
+
+home_flange_coords는 from pymycobot.mycobot280 import MyCobot280의 coords = mc.get_coords()의 값으로 
+원하는 위치를 설정합니다. 
+
+<p align="center">
+  <img 
+    src="./images/ifconfig.png" 
+    alt="노트북 터미널 ifconfig 실행 결과"
+    height="400"
+    width="700"
+  /><br>
+  <em>노트북 터미널 ifconfig 실행 결과</em>
+</p>
+
 
 ## 5. pick & place 및 throw 기능
 
